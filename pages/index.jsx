@@ -2,7 +2,8 @@ import Head from 'next/head'
 import {useEffect, useState} from 'react'
 
 export default function Home(initialData) {
-  const [formInputs, setFormInputs] = useState({})
+  const [formInputs, setFormInputs] = useState()
+  const [searchTerm, setSearchTerm] = useState('cats')
   const [searchResults, setSearchResults] = useState([])
 
   useEffect(()=>{
@@ -14,9 +15,12 @@ export default function Home(initialData) {
     setFormInputs({ ...formInputs, [name]: value });
   }
 
-  const search = (event) => {
+  const search = async (event) => {
     event.preventDefault()
-    console.log(formInputs.searchTerm);
+    let giphys = await fetch(`https://api.giphy.com/v1/gifs/search?q=${formInputs.searchTerm}&api_key=nPJNlVceWHERWCSDBW5XMo1p90l7l9ie&limit=6`)
+    giphys = await giphys.json()
+    setSearchResults(giphys.data)
+    setSearchTerm(formInputs.searchTerm)
   }
 
   return (
@@ -27,12 +31,14 @@ export default function Home(initialData) {
         <link rel="stylesheet" href="/styles.css"/>
       </Head>
 
-      <h1>Giphy Search App!</h1>
+      <h1>Giphy Search App</h1>
 
       <form onSubmit={search}>
         <input name="searchTerm" onChange={handleInputs} type="text" required />
         <button>Search</button>
       </form>
+
+      <h1>Search results for: {searchTerm}</h1>
 
       <div className="giphy-search-results-grid">
         {searchResults.map((each, index) => {
