@@ -27,7 +27,7 @@ export default function Home(initialData) {
         <link rel="stylesheet" href="/styles.css"/>
       </Head>
 
-      <h1>Giphy Search App</h1>
+      <h1>Giphy Search App!</h1>
 
       <form onSubmit={search}>
         <input name="searchTerm" onChange={handleInputs} type="text" required />
