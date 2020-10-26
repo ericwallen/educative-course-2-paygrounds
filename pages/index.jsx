@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from "next/link";
 import {useEffect, useState} from 'react'
 
 export default function Home(initialData) {
@@ -39,6 +40,18 @@ export default function Home(initialData) {
       </form>
 
       <h1>Search results for: {searchTerm}</h1>
+
+      <p>Share this search with others:
+        
+      <Link
+            href="/search/[pid]"
+            as={`/search/${searchTerm}`}>
+              <a> 
+                {`http://localhost:3000/search/${searchTerm}`}
+              </a>
+      </Link>
+     
+        </p>
 
       <div className="giphy-search-results-grid">
         {searchResults.map((each, index) => {
