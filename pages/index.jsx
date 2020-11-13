@@ -47,7 +47,7 @@ export default function Home(initialData) {
      
 
       <form onSubmit={search}>
-        <input name="searchTerm" onChange={handleInputs} type="text" required />
+        <input name="searchTerm" onChange={handleInputs} type="text" required placeholder="cats"/>
         <button>Search</button>
       </form>
 
